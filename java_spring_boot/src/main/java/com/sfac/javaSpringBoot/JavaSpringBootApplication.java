@@ -5,6 +5,16 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 
+
+
+@SpringBootApplication
+public class JavaSpringBootApplication {
+
+    public static void main(String[] args) {
+        SpringApplication.run(JavaSpringBootApplication.class, args);
+    }
+
+}
 /*
 为什么继承该类，SpringBootServletInitializer源码注释：
 
@@ -26,13 +36,3 @@ public class JavaSpringBootApplication extends SpringBootServletInitializer {
 
 }
 */
-
-
-@SpringBootApplication
-public class JavaSpringBootApplication {
-
-    public static void main(String[] args) {
-        SpringApplication.run(JavaSpringBootApplication.class, args);
-    }
-
-}
