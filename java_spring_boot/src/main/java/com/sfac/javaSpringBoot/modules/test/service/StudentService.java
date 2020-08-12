@@ -1,0 +1,16 @@
+package com.sfac.javaSpringBoot.modules.test.service;
+
+import com.sfac.javaSpringBoot.modules.common.vo.Result;
+import com.sfac.javaSpringBoot.modules.test.entity.Student;
+
+/**
+ * Created with IntelliJ IDEA.
+ * User: CH
+ * Date: 2020/8/12
+ * Time: 20:22
+ * Description: No Description
+ */
+public interface StudentService {
+
+    Result<Student> insertStudent(Student student);
+}
