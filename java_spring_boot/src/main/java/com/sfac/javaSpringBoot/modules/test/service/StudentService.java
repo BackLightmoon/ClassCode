@@ -22,4 +22,9 @@ public interface StudentService {
     Page<Student> getStudentBysearchvo(SearchVo searchVo);
 
     List<Student> getStudents();
+
+
+    List<Student> getStudentByStudentName(String studentName, int cardId);
+
+
 }

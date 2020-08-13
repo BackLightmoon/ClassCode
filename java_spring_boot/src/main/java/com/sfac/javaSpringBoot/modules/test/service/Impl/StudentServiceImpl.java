@@ -11,7 +11,9 @@ import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Created with IntelliJ IDEA.
@@ -72,4 +74,27 @@ public class StudentServiceImpl implements StudentService {
         Sort sort = new Sort(direction, "studentName");
         return studentRepository.findAll(sort);
     }
+
+    @Override
+    public List<Student> getStudentByStudentName(String studentName,int cardId) {
+        if (cardId > 0){
+            return  studentRepository.getStudentsByParams(studentName,cardId);
+        }else {
+            //属性查询
+//        return Optional
+//                .ofNullable(studentRepository.findByStudentName(studentName))
+//                .orElse(Collections.emptyList());
+            //模糊查询
+//        return Optional
+//                .ofNullable(studentRepository.findByStudentNameLike(
+//                        String.format("%s%s%s","%",studentName,"%")))
+//                .orElse(Collections.emptyList());
+            //模糊查询只取前两个
+            return Optional
+                    .ofNullable(studentRepository.findTop2ByStudentNameLike(
+                            String.format("%s%s%s","%",studentName,"%")))
+                    .orElse(Collections.emptyList());
+        }
+    }
+
 }

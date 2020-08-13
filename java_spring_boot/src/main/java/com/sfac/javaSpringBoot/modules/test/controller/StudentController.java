@@ -60,9 +60,34 @@ public class StudentController {
      * 127.0.0.1/api/students  ------get
      * @return
      */
-    @GetMapping("/students")
+   /* @GetMapping("/students")
     public List<Student> getStudents() {
         return studentService.getStudents();
+    }*/
+
+    /**
+     * 127.0.0.1/api/students?studentName=hujiang1------get
+     * @param studentName
+     * @return
+     */
+    /*@GetMapping("/students")
+    public List<Student> getStudentByStudentName(@RequestParam String studentName) {
+        return studentService.getStudentByStudentName(studentName);
+    }*/
+
+    /**
+     * hql查询
+     * 127.0.0.1/api/students1?studentName=hu------get
+     * @param studentName
+     * @return
+     */
+    @GetMapping("/students1")
+    public List<Student> getStudentByParams(
+            @RequestParam String studentName,
+            //required表示并不是必须的，默认值为1
+            @RequestParam(required = false , defaultValue = "0") Integer cardId) {
+        return studentService.getStudentByStudentName(studentName,cardId);
     }
+
 
 }
