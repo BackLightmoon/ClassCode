@@ -15,6 +15,7 @@ public class JavaSpringBootApplication {
     }
 
 }
+
 /*
 为什么继承该类，SpringBootServletInitializer源码注释：
 

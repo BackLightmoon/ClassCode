@@ -11,6 +11,8 @@ import com.sfac.javaSpringBoot.modules.test.entity.Country;
  */
 public interface CountryService {
 
-    Country getCounryByCountryId(int countryId);
+    Country getCountryByCountryId(int countryId);
     Country getCountryByCountryName(String countryName);
+
+    Country mograteCountryByRedis(int countryId);
 }
