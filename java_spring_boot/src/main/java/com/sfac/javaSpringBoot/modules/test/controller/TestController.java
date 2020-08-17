@@ -13,8 +13,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -73,7 +75,7 @@ public class TestController {
         modelMap.addAttribute("country", country);
         modelMap.addAttribute("cities", cities);
         modelMap.addAttribute("updateCityUri", "/api/city");
-        modelMap.addAttribute("template", "test/index");
+        //modelMap.addAttribute("template", "test/index");
         // 返回外层的碎片组装器
         return "index";
     }
@@ -125,12 +127,14 @@ public class TestController {
 
     }
     /**
-     * 127.0.0.1:8080/test/testDesc----get
+     * 127.0.0.1/test/testDesc?paramKey=fuck----get
      * @return
      */
     @GetMapping("/testDesc")
     @ResponseBody
-    public String testDesc(){
-        return "this is test module desc";
+    public String testDesc(HttpServletRequest request,
+                           @RequestParam(value = "paramKey") String paramValue){
+        String paramValue2  =request.getParameter("paramKey");
+        return "this is test module desc......" +paramValue +"===" + paramValue2;
     }
 }
