@@ -9,14 +9,21 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.UrlResource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.File;
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.nio.file.Paths;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -51,6 +58,106 @@ public class TestController {
     @Autowired
     private CityService cityService;
 
+    /**
+     * 127.0.0.1/test/file -----post
+     * @param file
+     * @param redirectAttributes
+     * @return
+     * 接收类型：multipart/form-data，和前端一样
+     */
+    @PostMapping(value = "/file", consumes = "multipart/form-data")
+    public String uploadFile(@RequestParam MultipartFile file,
+                             RedirectAttributes redirectAttributes) {
+        if (file.isEmpty()) {
+            redirectAttributes.addFlashAttribute(
+                    "message", "Please select file.");
+            return "redirect:/test/index";
+        }
+
+
+        try {
+            //路径+文件名
+            String destFilePath = "D:\\Java\\IdeaProjects\\ProjectCode\\upload\\" + file.getOriginalFilename();
+            //目标文件destFile
+            File destFile = new File(destFilePath);
+            //迁移到某个地方
+            file.transferTo(destFile);
+            // 使用工具类Files来上传文件
+//			byte[] bytes = file.getBytes();
+//			Path path = Paths.get(destFileName);
+//			Files.write(path, bytes);
+            redirectAttributes.addFlashAttribute(
+                    "message", "Upload file success.");
+        } catch (IOException e) {
+            e.printStackTrace();
+            redirectAttributes.addFlashAttribute(
+                    "message", "Upload file failed.");
+        }
+
+        return "redirect:/test/index";
+    }
+
+    @PostMapping(value = "/files",consumes = "multipart/form-data")
+    public String uploadFiles(@RequestParam MultipartFile[] files,
+                              RedirectAttributes redirectAttributes){
+        //标识
+        boolean empty=true;
+            try {
+                for (MultipartFile file :files) {
+                    if (file.isEmpty()){
+                        //为空。进入下一次循环
+                        continue;
+                    }
+                    String destFilePath = "D:\\Java\\IdeaProjects\\ProjectCode\\upload\\" + file.getOriginalFilename();
+                    File destFile = new File(destFilePath);
+                    file.transferTo(destFile);
+                    empty=false;
+                }
+                if (empty){
+                    redirectAttributes.addFlashAttribute(
+                            "message", "Please select file.");
+                }else {
+                    redirectAttributes.addFlashAttribute(
+                            "message", "Upload file success.");
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+                redirectAttributes.addFlashAttribute(
+                        "message", "Upload file failed.");
+            }
+
+        return "redirect:/test/index";
+    }
+
+    /**
+     * 127.0.0.1/test/file ------get
+     * @param fileName
+     * @return
+     */
+    @GetMapping("/file")
+    public ResponseEntity downloadFile(@RequestParam String fileName){
+
+        Resource resource=null;
+        try {
+           resource= new UrlResource(
+                    Paths.get("D:\\Java\\IdeaProjects\\ProjectCode\\upload\\"+fileName).toUri());
+            /**
+             * CONTENT_TYPE，包装好的常量，可以替代Content-Type
+             * CONTENT_DISPOSITION对于下载的描述
+             * attachment：以附件的形式存在的
+             * filename：下载的内容的名称
+             */
+            return ResponseEntity
+                    .ok()
+                    .header(HttpHeaders.CONTENT_TYPE,"application/octet-stream")
+                    .header(HttpHeaders.CONTENT_DISPOSITION,
+                            String.format("attachment;filename=\"%s\"",resource.getFilename()))
+                    .body(resource);
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
     /**
      * 127.0.0.1/test/index
      * @return
