@@ -22,6 +22,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import java.nio.file.Paths;
 import java.util.List;
@@ -137,10 +138,14 @@ public class TestController {
     @GetMapping("/file")
     public ResponseEntity downloadFile(@RequestParam String fileName){
 
+        String aa = null;
         Resource resource=null;
         try {
            resource= new UrlResource(
                     Paths.get("D:\\Java\\IdeaProjects\\ProjectCode\\upload\\"+fileName).toUri());
+           if(resource.exists()&&resource.isReadable()){
+               aa=new String(fileName.getBytes("utf-8"),"ISO-8859-1");
+           }
             /**
              * CONTENT_TYPE，包装好的常量，可以替代Content-Type
              * CONTENT_DISPOSITION对于下载的描述
@@ -151,9 +156,9 @@ public class TestController {
                     .ok()
                     .header(HttpHeaders.CONTENT_TYPE,"application/octet-stream")
                     .header(HttpHeaders.CONTENT_DISPOSITION,
-                            String.format("attachment;filename=\"%s\"",resource.getFilename()))
+                            String.format("attachment;filename=\"%s\"",aa))
                     .body(resource);
-        } catch (MalformedURLException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return null;
