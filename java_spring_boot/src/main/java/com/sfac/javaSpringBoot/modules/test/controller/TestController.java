@@ -60,6 +60,14 @@ public class TestController {
     private CityService cityService;
 
     /**
+     * 127.0.0.1/test/indexSimple  -----get
+     * @return
+     */
+    @GetMapping("/indexSimple")
+    private String indexSimpleTestPage(){
+        return "indexSimple";
+    }
+    /**
      * 127.0.0.1/test/file -----post
      * @param file
      * @param redirectAttributes
