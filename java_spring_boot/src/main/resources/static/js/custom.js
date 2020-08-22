@@ -5036,4 +5036,22 @@ $(document).ready(function () {
     init_autosize();
     init_autocomplete();
 
-});	
+});
+
+/*====================================*/
+function initRoles(rolesDivId,roleElementForAdd) {
+    $.ajax({
+        url:"/api/roles",
+        type:"get",
+        success:function (rs) {
+            var rolesDiv =$('#'+rolesDivId);
+            rolesDiv.empty();
+            $.each(rs,function (i,item) {
+                rolesDiv.append("<input type='checkbox' name='"+roleElementForAdd+"' value='"+item.roleId+"'>" + item.roleName +" ")
+            });
+        },
+        error:function (data) {
+            layer.alert(data.responseText,{icon:0});
+        }
+    });
+}
