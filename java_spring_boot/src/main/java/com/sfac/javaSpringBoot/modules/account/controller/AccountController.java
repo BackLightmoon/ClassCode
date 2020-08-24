@@ -42,5 +42,22 @@ public class AccountController {
         return "indexSimple";
     }
 
+    /**
+     * 127.0.0.1/account/profile ---------get
+     * @return
+     */
+    @GetMapping("/profile")
+    public String profilePage(){
+        return "index";
+    }
+
+    /**
+     * 127.0.0.1/account/registerVue ---------get
+     * @return
+     */
+    @GetMapping("/registerVue")
+    public String registerVuePage(){
+        return "indexSimple";
+    }
 
 }

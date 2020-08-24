@@ -117,8 +117,10 @@
             'data-show-refresh': true, 	//data显示刷新，用在增删改动作之后
             'ordering': true,   //每一列排序位置
             'autoWidth': false,  //自动设置每一列的宽度
-            //data：对数据的一个包装，操作页面上的一些关联数据
-            //callback：回调函数，
+            //ajax属性配置
+            //data：对数据的一个包装，操作页面上的一些关联数据-----包装表格数据，通过浏览器页面js调整，获取data属性
+            //------分页起始index、排序、关键字查询等信息 -----包装searchvo对象
+            //callback：回调函数，将表格数据传入，渲染表格
             //settings：设定值
             "ajax": function (data, callback, settings) {
                 // 从data获取查询数据

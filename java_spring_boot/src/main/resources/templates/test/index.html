@@ -1,4 +1,46 @@
 <div class="right_col" role="main">
+
+    <div id="vueTest">
+        <h3>文本绑定</h3>
+        <div>{{title}}</div>
+        <h3>属性绑定 ------- 单项绑定 model to View</h3>
+        User Name:<input type="text" v-bind:value="userName"><br>
+        Password:<input type="text" :value="password"><br>
+        <h3>表单控件绑------双向绑定 model <---> view</h3>
+        Email: <input type= "text" V-model=" email"><br>
+         <!--V- model .number 表示输入值转为number -->
+        Step: <input type="text" V-model.number="step">
+        Account: <input type="text" V-model="total">
+        <h3>事件绑定</h3>
+        test_1: <input type="button" v-on:click="test_1()" value="test_1"><br>
+        test_2: <input type="button" @click="test_2( )" value="test_2"><br>
+
+    </div>
+    <script type="text/javascript">
+        var vueTest = new Vue({
+            el:"#vueTest",
+            data:{
+                title:"vue Test",
+                userName:"Hymanhu",
+                password:"111111",
+                email: "hujiang@163.com",
+                step:1,
+                total:0,
+            },
+            methods:{
+                test_1: function () {
+                    alert(this.userName+this.password);
+                    this.userName="aaaaaa";
+                    this.password="bbbbbb";
+                },
+                test_2: function () {
+                    alert(this.email);
+                    this.total = this.total+this.step;
+                }
+            }
+        });
+    </script>
+
 <h3>file upload and downlod</h3>
 <a href="/test/file?fileName=灵魂莲花 亚索.jpg">download file</a>
 
