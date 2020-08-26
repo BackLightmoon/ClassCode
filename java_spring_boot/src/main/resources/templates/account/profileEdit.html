@@ -11,7 +11,8 @@
 
             <div class="modal-body">
                 <form class="form-horizontal">
-                    <input type="hidden" id="userId" name="userId" value=""/>
+                    <input type="hidden" id="userId" name="userId" value="">
+
                     <div class="form-group row">
                         <label class="control-label col-md-3">User Name</label>
                         <div class="col-md-8">
@@ -22,10 +23,15 @@
                     <div class="form-group row">
                         <label class="control-label col-md-3">User Image</label>
                         <div class="col-md-8">
-                            <input type="hidden" id="userImg" name="userImg" value=""/>
+                            <input type="hidden" id="userImg" name="userImg">
+                            <!-- name="file" 要与控制层对应的参数名相同-->
+                            <!--这里是加了插件inputfile的css和js文件后，multiple可以如下这样写，不然得
+                                像test/index.html那样写在form标签里面enctype="multipart/form-data"
+                            -->
                             <input id="uploadImage" type="file" name="file" multiple=true>
                         </div>
                     </div>
+
                 </form>
             </div>
 
@@ -37,3 +43,4 @@
         </div>
     </div>
 </div>
+

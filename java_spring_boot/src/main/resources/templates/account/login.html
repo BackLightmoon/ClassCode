@@ -1,26 +1,27 @@
-<a class="hiddenanchor" id="signup"></a>
-<a class="hiddenanchor" id="signin"></a>
-
 <div class="login_wrapper">
     <div class="animate form login_form">
         <section class="login_content">
             <form action="javascript:void(0);">
-                <h1>*** Manager System</h1>
+                <h1>*** Manager System Login Page</h1>
                 <div>
-                    <input name="userName" type="text" class="form-control" placeholder="Username" required="" />
+                    <input name="userName" type="text" class="form-control" placeholder="Username" required=""/>
                 </div>
                 <div>
-                    <input name="password" type="password" class="form-control" placeholder="Password" required="" />
+                    <input name="password" type="password" class="form-control" placeholder="Password" required=""/>
                 </div>
+
+                <!--动态验证码-->
                 <div>
                     <input class="form-control input-val" type="text" value="" placeholder="请输入验证码（不区分大小写）"
                            style="float:left; width:68%; margin-bottom: 0px;">
                     <canvas id="canvas" width="100" height="36"></canvas>
                 </div>
+                <!--记住我-->
                 <div style="text-align:left; margin-top: 5px; margin-left: 3px;">
                     <input type="checkbox" lay-filter="filter" name="rememberMe" style="float: left;"
                            lay-skin="primary" title="30天内自动登录" >30天内自动登录
                 </div>
+
                 <div>
                     <a id="loginButton" class="btn btn-default submit" href="javascript:void(0);">Log in</a>
                     <a class="reset_pass" href="#">Lost your password?</a>
@@ -34,46 +35,49 @@
                     </p>
 
                     <div class="clearfix"></div>
-                    <br />
+                    <br/>
 
                     <div>
-                        <h1><i class="fa fa-paw"></i>THE-BACK-LIGHT</h1>
-                        <p>©2020 All Rights Reserved.Create By THE-BACK-LIGHT</p>
+                        <h1><i class="fa fa-paw"></i> Jayoung Lee!</h1>
+                        <p>©2020 All Rights Reserved. Created By Jayoung Lee</p>
                     </div>
                 </div>
             </form>
         </section>
     </div>
+
+
 </div>
 
 <script type="text/javascript">
+    //页面加载时就要执行的函数
     show_num = [];
     $(function () {
         draw(show_num);
         $("#canvas").on('click',function(){
             draw(show_num);
         });
+
         $("#loginButton").bind("click",function () {
             login();
         });
     });
 
     function login() {
-
-        var code = $(".input-val").val();
-        var num = show_num.join("");
-        /*if (code == "") {
-            layer.msg("Please input Verification Code.", {icon: 0});
-            return;
-        } else if (code != num) {
-            layer.msg("The input code is error.", {icon: 0});
-            return;
-        };*/
-
         var user={};
-        user.userName=$("[name=userName]").val();
-        user.password=$("[name=password]").val();
+        user.userName = $("[name=userName]").val();
+        user.password = $("[name=password]").val();
         user.rememberMe = $("[name=rememberMe]").prop("checked");
+
+        var num = show_num.join("");
+        var code = $(".input-val").val();
+        // if (code == "") {
+        //     layer.msg("Please input Verification Code.", {icon: 0});
+        //     return;
+        // } else if (code != num) {
+        //     layer.msg("The input Verification Code is error.", {icon: 0});
+        //     return;
+        // };
 
         $.ajax({
             url:"/api/login",
@@ -81,14 +85,14 @@
             contentType:"application/json",
             data:JSON.stringify(user),
             success:function (data) {
-                if(data.status == 200){
-                    location.href="/common/dashboard";
-                }else {
-                    layer.msg(data.message,{icon:0});
+                if (data.status == 200 ){
+                    location.href = "/common/dashboard";
+                } else {
+                    layer.msg(data.message, {icon: 0})
                 }
             },
-            error:function (data){
-                layer.msg(data.responseText,{icon:0});
+            error:function (data) {
+                layer.msg(data.responseText, {icon: 0});
             }
         });
     }
@@ -147,5 +151,4 @@
         var b = Math.floor(Math.random() * 256);
         return "rgb(" + r + "," + g + "," + b + ")";
     }
-
 </script>
