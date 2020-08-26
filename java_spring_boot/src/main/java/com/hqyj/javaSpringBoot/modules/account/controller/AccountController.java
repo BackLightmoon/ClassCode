@@ -19,7 +19,7 @@ public class AccountController {
     @Autowired
     private UserService userService;
     /**
-     * 127.0.0.1:667/account/login   ---- get
+     * 127.0.0.1/account/login   ---- get
      */
     @GetMapping("/login")
     public String loginPage(){
@@ -38,7 +38,7 @@ public class AccountController {
     }
 
     /**
-     * 127.0.0.1:667/account/register   ---- get
+     * 127.0.0.1/account/register   ---- get
      */
     @GetMapping("/register")
     public String registerPage(){
@@ -51,7 +51,7 @@ public class AccountController {
 //    }
 
     /**
-     * 127.0.0.1:667/account/users   ---- get
+     * 127.0.0.1/account/users   ---- get
      */
     @GetMapping("/users")
     public String usersPage(){
@@ -59,7 +59,7 @@ public class AccountController {
     }
 
     /**
-     * 127.0.0.1:667/account/roles   ---- get
+     * 127.0.0.1/account/roles   ---- get
      */
     @GetMapping("/roles")
         public String rolesPage(){
@@ -67,7 +67,7 @@ public class AccountController {
     }
 
     /**
-     * 127.0.0.1:667/account/resources   ---- get
+     * 127.0.0.1/account/resources   ---- get
      */
     @GetMapping("/resources")
     public String resourcesPage(){
@@ -75,7 +75,7 @@ public class AccountController {
     }
 
     /**
-     * 127.0.0.1:667/account/profile   ---- get
+     * 127.0.0.1/account/profile   ---- get
      */
     @GetMapping("/profile")
     public String profilePage(){
@@ -83,7 +83,7 @@ public class AccountController {
     }
 
     /**
-     * 127.0.0.1:667/account/registerVue   ---- get
+     * 127.0.0.1/account/registerVue   ---- get
      */
     @GetMapping("/registerVue")
     public String registerVue(){

@@ -26,7 +26,7 @@ public class RoleController {
     private RoleService roleService;
 
     /*
-    *  http://localhost:667/api/roles   ---- get
+    *  127.0.0.1/api/roles   ---- get
     * */
     @GetMapping("/roles")
     public List<Role> getRoles(){
@@ -35,7 +35,7 @@ public class RoleController {
 
 
     /*
-     *  http://localhost:667/api/role   ---- post
+     *  127.0.0.1/api/role   ---- post
      *  {"roleName":"admin111"}
      * */
     @PostMapping(value = "/role",consumes = MediaType.APPLICATION_JSON_VALUE)
@@ -44,7 +44,7 @@ public class RoleController {
     }
 
     /*
-     *  http://localhost:667/api/roles   ---- post
+     *  127.0.0.1/api/roles   ---- post
      *  {"currentPage":"1","pageSize":"5","keyWord":"ad"}
      * */
     @PostMapping(value = "/roles", consumes = MediaType.APPLICATION_JSON_VALUE)
@@ -54,7 +54,7 @@ public class RoleController {
 
 
     /**
-     * 127.0.0.1:667/api/role   ---- put
+     * 127.0.0.1/api/role   ---- put
      * {"roleName":"adminnnxxx","roleId":"5"}
      */
     @PutMapping(value = "/role",consumes = MediaType.APPLICATION_JSON_VALUE)
@@ -63,7 +63,7 @@ public class RoleController {
     }
 
     /**
-     * 127.0.0.1:667/api/role/roleId   ---- delete
+     * 127.0.0.1/api/role/roleId   ---- delete
      */
     @DeleteMapping("/role/{roleId}")
     public Result<Object> deleteRole(@PathVariable int roleId) {
@@ -71,7 +71,7 @@ public class RoleController {
     }
 
     /**
-     * 127.0.0.1:667/api/role/roleId   ---- get
+     * 127.0.0.1/api/role/roleId   ---- get
      */
     @GetMapping("/role/{roleId}")
     public Role getRoleByRoleId(@PathVariable int roleId) {

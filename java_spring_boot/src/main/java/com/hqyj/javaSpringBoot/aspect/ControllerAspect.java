@@ -1,5 +1,6 @@
 package com.hqyj.javaSpringBoot.aspect;
 
+import org.apache.shiro.SecurityUtils;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.*;
@@ -51,6 +52,8 @@ public class ControllerAspect {
         LOGGER.debug("响应方式："+joinPoint.getSignature().getDeclaringTypeName()+"."
         +joinPoint.getSignature().getName());
         LOGGER.debug("请求参数："+ Arrays.toString(joinPoint.getArgs()));
+        LOGGER.debug(SecurityUtils.getSubject().isRemembered() +
+                "--" + SecurityUtils.getSubject().isAuthenticated());
 
     }
 

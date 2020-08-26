@@ -29,7 +29,7 @@ public class UserController {
     private UserService userService;
 
     /**
-     * 127.0.0.1:667/api/user   ---- post
+     * 127.0.0.1/api/user   ---- post
      * {"userName":"admin","password":"111111"}
      */
     @PostMapping(value = "/user",consumes = MediaType.APPLICATION_JSON_VALUE)
@@ -40,7 +40,7 @@ public class UserController {
 
     /**
      * Login
-     * 127.0.0.1:667/api/login   ---- post
+     * 127.0.0.1/api/login   ---- post
      * {"userName":"admin","password":"111111"}
      */
     @PostMapping(value = "/login",consumes = MediaType.APPLICATION_JSON_VALUE)
@@ -51,7 +51,7 @@ public class UserController {
 
 
     /**
-     * 127.0.0.1:667/api/users   ---- post
+     * 127.0.0.1/api/users   ---- post
      * {"currentPage":"1","pageSize":"5","keyWord":"ad"}
      */
     @PostMapping(value = "/users",consumes = MediaType.APPLICATION_JSON_VALUE)
@@ -60,7 +60,7 @@ public class UserController {
     }
 
     /**
-     * 127.0.0.1:667/api/user   ---- put
+     * 127.0.0.1/api/user   ---- put
      * {"userName":"adminnn","userImg":"/aaa.jpg","userId":"4"}
      */
     @PutMapping(value = "/user",consumes = MediaType.APPLICATION_JSON_VALUE)
@@ -70,7 +70,7 @@ public class UserController {
 
 
     /**
-     * 127.0.0.1:667/api/user/userId   ---- delete
+     * 127.0.0.1/api/user/userId   ---- delete
      */
     @DeleteMapping("/user/{userId}")
     @RequiresPermissions(value = "/api/user")
@@ -79,7 +79,7 @@ public class UserController {
     }
 
     /**
-     * 127.0.0.1:667/api/user/userId   ---- get
+     * 127.0.0.1/api/user/userId   ---- get
      */
     @GetMapping("/user/{userId}")
     public User getUserByUserId(@PathVariable int userId) {
@@ -90,7 +90,7 @@ public class UserController {
 
     //多个文件上传
     /**
-     * 127.0.0.1:667/api/userImg   ---- post
+     * 127.0.0.1/api/userImg   ---- post
      */
     @PostMapping(value = "userImg", consumes = "multipart/form-data")
     public Result<String> uploadUserImg(@RequestParam MultipartFile file) {

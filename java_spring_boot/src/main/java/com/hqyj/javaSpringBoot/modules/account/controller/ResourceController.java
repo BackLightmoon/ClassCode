@@ -22,7 +22,7 @@ public class ResourceController {
     private ResourceService resourceService;
 
     /**
-     * 127.0.0.1:667/api/resource   ---- post
+     * 127.0.0.1/api/resource   ---- post
      * {"resourceUri":"www.1.com","resourceName":"资源1","permission":"permission01"}
      */
     @PostMapping(value = "/resource", consumes = MediaType.APPLICATION_JSON_VALUE)
@@ -31,7 +31,7 @@ public class ResourceController {
     }
 
     /**
-     * 127.0.0.1:667/api/resources   ---- post
+     * 127.0.0.1/api/resources   ---- post
      * {"currentPage":"1","pageSize":"5","keyWord":"资源"}
      */
     @PostMapping(value = "/resources", consumes = MediaType.APPLICATION_JSON_VALUE)
@@ -40,7 +40,7 @@ public class ResourceController {
     }
 
     /**
-     * 127.0.0.1:667/api/resource   ---- put
+     * 127.0.0.1/api/resource   ---- put
      * {"resourceName":"资源008","resourceUri":"www.08.com","permission":"permission008","resourceId":"8"}
      */
     @PutMapping(value = "resource", consumes = MediaType.APPLICATION_JSON_VALUE)
@@ -49,7 +49,7 @@ public class ResourceController {
     }
 
     /**
-     * 127.0.0.1:667/api/resource/resourceId   ---- delete
+     * 127.0.0.1/api/resource/resourceId   ---- delete
      */
     @DeleteMapping("/resource/{resourceId}")
     public Result<Object> deleteResource(@PathVariable int resourceId) {
@@ -57,7 +57,7 @@ public class ResourceController {
     }
 
     /**
-     * 127.0.0.1:667/api/resource/resourceId   ---- get
+     * 127.0.0.1/api/resource/resourceId   ---- get
      */
     @GetMapping("/resource/{resourceId}")
     public Resource getResourceByResourceId(@PathVariable int resourceId) {
