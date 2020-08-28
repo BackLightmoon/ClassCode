@@ -1,0 +1,155 @@
+﻿一、选择题（共12小题，每小题2.5分，共30分）
+	以下不是spring boot优点的是 ( D )
+		A．快速搭建项目
+		B．简化配置  
+		C．自动配置  
+		D．无需容器
+	Spring Boot配置，以下哪个优先级最高（A ）
+		A、外置：xx.jar同目录下/config/application.properties；
+		B、外置：xx.jar同目录下/config/application.yml；
+		C、内置：src/main/resources/config；
+		D、内置：src/main/resources
+	以下log日志级别哪个最高（A）
+		A、DEBUG
+		B、INFO
+		C、WARN
+		D、ERROR
+	以下不是spring boot的核心注解的是 ( D)
+		A.	@SpringBootConfiguration
+		B.	@EnableAutoConfiguration
+		C.	@ComponentScan
+		D.	@MapperScan
+	要使用springMVC的功能，需要导入那个包 ( B)
+		A．spring-boot-starter-jdbc  
+		B．spring-boot-starter-thymeleaf  
+		C．spring-boot-starter-web  
+		D．mybatis-spring-boot-starter
+	以下哪个注解不能加在类上 ( B )
+		A.	@Controller
+		B.	@ResponseBody
+		C.	@RestController
+		D.	@RequestMapping
+	当控制层上有@RestController注解时，方法中返回一个字符串“<h1>Hello</h1>”，浏览器调用的结果是 ( B )
+		A. 一级标题显示的Hello
+		B.	找不到Hello.html
+		C.	<h1>Hello</>
+		D.	Hello
+	SpringBoot项目中配置文件的格式 ( C )
+		A．properties  
+		B．yml  
+		C．两者都可以
+	不是SpringBoot核心配置文件是（C）
+		A.	bootstrap
+		B.	application
+		C.	application-dev
+	前台使用json参数格式，控制器consumer、参数使用的注解是（A）
+		A、application/josn ---- @RequestBody
+		B、application/josn ---- @ModelAttribute
+		C、application/x-www-form-urlencoded ---- @RequestBody
+		D、application/x-www-form-urlencoded ---- @ModelAttribute
+	@Pointcut("execution(public * com.thornBird.sbd.modules.*.controller.*.*(..))")，第三个*代表（C）
+		A、代表返回类型不限
+		B、代表module下所有子包
+		C、代表所有类
+		D、代表所有方法
+	Url匹配风格中/admin*，以下哪个匹配不正确（D）
+		A、/admin
+		B、/admin1
+		C、/admin123
+		D、/admin/1
+	Mybatis框架中，插入数据使用那个注解（B）
+		A、@Update
+		B、@Insert
+		C、@Select
+		D、@InsertMapping
+
+二、填空题（共5小题，每小题5分，共25分）
+	获取配置文件的属性值，使用哪个注解______@Value__________；
+	Java配置依赖的2个注解是_____@Configuration_____，___@Bean________;
+	Spring Boot修改tomcat端口号为9090应该怎么写？_____server.port=9090_______;
+	自定义拦截器需要实现____HandlerInterceptor____接口；
+	过滤器需要使用_____Filter____注解;
+	上传文件，使用__@RequestParam__接收文件对象，consumer使用_multipart/form-data____;
+
+三、问答题（每题5分，共25分）
+	阐述 Spring Boot 特性，举一个例子来解释 Staters 的内容；
+		答：①快速开发：pom，以starter 形式，按照组类聚了多个jar，形成单条依赖，以父子继承的方式，实			现jar 版本的控制；
+		②自动装配：Bean自动配置，完全采用注解化，对jar包对象的引用，无需再配置Bean 对象，可直接注入；
+		③简化配置：“习惯优于配置”，简化了配置，没有web.xml
+		④Staters：比方说驾驶汽车，如果没有工厂，可能我们需要自己制造各种配件，组装，然后测试好，然后上		路，有了工厂，工厂可以代替我们进行这些操作，而我们直接使用车即可。Staters相当于一个我们的工厂，		替我们实现对jar的控制。	
+
+	Mybatis传参中，#{*}、${*}的区别？
+		答：#{*}是预编译处理，而${*}是字符拼接，在使用时#{*}会替换成？，在配合preparestatement使用set方		法注入，且注入的值用 '' 包裹，而${*}则是直接用值去拼接，${*}多用于排序。
+
+	简述Restful规则？
+		答：①协议：API与用户的通信协议，总是使用https协议。
+		②域名： 应该尽量将API部署在专用域名之下，例如：https://api.example.com，如果确定API很简单，不		会有进一步扩展，可以考虑放在主域名：https://example.com/api
+		③路径：路径又称"终点"（endpoint），表示API的具体网址。在RESTful架构中，每个网址代表一种资源		（resource），所以网址中不能有动词，只能有名词，而且所用的名词往往与数据库的表格名对应。一般来			说，数据库中的表都是同种记录的"集合"（collection），所以API中的名词也应该使用复数。
+		④常用动词：对于资源的具体操作类型，由HTTP动词表示。常用的HTTP动词有下面五个
+		GET（SELECT）：从服务器取出资源（一项或多项）。
+		POST（CREATE）：在服务器新建一个资源。
+		PUT（UPDATE）：在服务器更新资源（客户端提供改变后的完整资源）。
+		PATCH（UPDATE）：在服务器更新资源（客户端提供改变的属性）。
+		DELETE（DELETE）：从服务器删除资源。
+		⑤过滤信息：如果记录数量很多，服务器不可能都将它们返回给用户。API应该提供参数，过滤返回结果。
+		⑥状态码：服务器向用户返回的状态码和提示信息。如200,404等
+		⑦错误处理：如果状态码是4xx，就应该向用户返回出错信息。一般来说，返回的信息中将error作为键名，		出错信息作为键值即可。
+		⑧返回结果：针对不同操作，服务器向用户返回的结果应该符合以下规范。
+		GET /collection：返回资源对象的列表（数组）
+		GET /collection/resource：返回单个资源对象
+		POST /collection：返回新生成的资源对象
+		PUT /collection/resource：返回完整的资源对象
+		PATCH /collection/resource：返回完整的资源对象
+		DELETE /collection/resource：返回一个空文档
+		⑨Hypermedia API:RESTful API最好做到Hypermedia，即返回结果中提供链接，连向其他API方法，使得用户		不查文档，也知道下一步应该做什么。
+		⑩其他:（1）API的身份认证应该使用OAuth 2.0框架。
+		（2）服务器返回的数据格式，应该尽量使用JSON，避免使用XML。
+
+	简述Git使用流程，写几个常用Git命令？
+		答：①初始化-创建远程仓库-忽略提交文件-修改代码后放入暂存区-提交到本地仓库-拉去最新的提交代码-		检查代码是否有冲突-合并分支--同步到远程仓库
+		②常用命令:git clone xxxx  克隆仓库地址
+			 git branch ---查看本地分支
+			git branch -r ---查看所有远程分支
+			git branch -D local_branch ----删除本地分支
+
+	简述shiro两大功能实现流程；
+		答：获取当前的 Subject. 调用 SecurityUtils.getSubject();
+		测试当前的用户是否已经被认证. 即是否已经登录. 调用 Subject 的 isAuthenticated()
+		若没有被认证, 则把用户名和密码封装为 UsernamePasswordToken 对象
+		1). 创建一个表单页面
+		2). 把请求提交到 SpringMVC 的 Handler
+		3). 获取用户名和密码.
+		执行登录: 调用 Subject 的 login(AuthenticationToken) 方法.
+		自定义 Realm 的方法, 从数据库中获取对应的记录, 返回给 Shiro.
+		1). 实际上需要继承 org.apache.shiro.realm.AuthenticatingRealm 类
+		2). 实现 doGetAuthenticationInfo(AuthenticationToken) 方法.
+		2). 实现 doGetAuthenticationInfo(AuthenticationToken) 方法.
+		由 shiro 完成对密码的比对.
+		1).密码的比对:
+		通过 AuthenticatingRealm 的 credentialsMatcher 属性来进行的密码的比对!
+		2). 如何把一个字符串加密为 MD5
+		替换当前 Realm 的 credentialsMatcher 属性. 直接使用 HashedCredentialsMatcher 对象, 并设置加密算		法即可.
+		为什么使用 MD5 盐值加密:
+		如何做到:
+		1). 在 doGetAuthenticationInfo 方法返回值创建 SimpleAuthenticationInfo 对象的时候, 需要使用
+		SimpleAuthenticationInfo(principal, credentials, credentialsSalt, realmName) 构造器
+		2). 使用 ByteSource.Util.bytes() 来计算盐值.
+		3). 盐值需要唯一: 一般使用随机字符串或 user id
+		4). 使用 new SimpleHash(hashAlgorithmName, credentials, salt, hashIterations); 来计算盐值加密后		的密码的值.
+
+四、编程题（每题10分，共20分）
+	1、提供一个接口，返回 List<User> 列表，对该列表进行排序、保留10条数据；页面端使用 ajax post 方式提交请求，包装查询参数，获取接口返回数据，并遍历数据渲染到页面上 table 表格中；
+	    public interface UserService {
+	    PageInfo<User> getUsersBySearchVo(SearchVo searchVo);
+	    }
+	    public interface UserService implements UserService{
+	       @Override
+               public PageInfo<User> getUsersBySearchVo(SearchVo searchVo) {
+                   searchVo.initSearchVo();
+                   PageHelper.startPage(searchVo.getCurrentPage(), searchVo.getPageSize());
+                   return new PageInfo<User>(
+                           Optional.ofNullable(userDao.getUsersBySearchVo(searchVo))
+                                   .orElse(Collections.emptyList()));
+               }
+	    }
+	2、设计一套购物车接口，以 Cookie 或者 redis 实现
