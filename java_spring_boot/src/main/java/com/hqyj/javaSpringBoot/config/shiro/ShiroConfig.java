@@ -79,9 +79,10 @@ public class ShiroConfig {
         map.put("/api/user", "anon");
         map.put("/account/profile", "anon");
 
-        map.put("/common/**", "user");
-        map.put("/test/**", "user");
-        map.put("/account/**", "authc");
+        // 如果使用“记住我功能”，则采用user规则，如果必须要用户登录，则采用authc规则
+        // path范围越大的，放后面
+        map.put("/test/**", "authc");
+        map.put("/**", "user");
 
         shiroFilter.setFilterChainDefinitionMap(map);
 
@@ -154,7 +155,8 @@ public class ShiroConfig {
         SimpleCookie simpleCookie = new SimpleCookie("shiro.sesssion");
         simpleCookie.setPath("/");
         simpleCookie.setHttpOnly(true);
-        simpleCookie.setMaxAge(1*24*60*60);
+        //simpleCookie.setMaxAge(1 * 24 * 60 * 60);
+        simpleCookie.setMaxAge(20);
         return simpleCookie;
     }
 
