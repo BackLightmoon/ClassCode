@@ -8,6 +8,7 @@ import com.sfac.springcloud.springCloudClientTest.modules.test.dao.CityDao;
 import com.sfac.springcloud.springCloudClientTest.modules.test.entity.City;
 import com.sfac.springcloud.springCloudClientTest.modules.test.service.CityService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -24,11 +25,14 @@ import java.util.Optional;
 @Service
 public class CityServiceImpl implements CityService {
 
+    @Value("${server.port}")
+    private int port;
     @Autowired
     private CityDao cityDao;
 
     @Override
     public List<City> getCountryByCountryId(int countryId) {
+        System.out.println("server.port"+port);
         return cityDao.getCountryByCountryId(countryId);
     }
 

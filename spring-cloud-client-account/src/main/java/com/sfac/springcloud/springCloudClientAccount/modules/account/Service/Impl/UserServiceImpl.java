@@ -2,6 +2,8 @@ package com.sfac.springcloud.springCloudClientAccount.modules.account.Service.Im
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
+import com.sfac.springcloud.springCloudClientAccount.modules.account.Service.TestFeignClient;
 import com.sfac.springcloud.springCloudClientAccount.modules.account.Service.UserService;
 import com.sfac.springcloud.springCloudClientAccount.modules.account.dao.UserDao;
 import com.sfac.springcloud.springCloudClientAccount.modules.account.entity.City;
@@ -17,6 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.File;
 import java.io.IOException;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
@@ -33,6 +36,8 @@ public class UserServiceImpl implements UserService {
     private UserDao userDao;
     @Autowired
     private RestTemplate restTemplate;
+    @Autowired
+    private TestFeignClient testFeignClient;
 
     @Override
     @Transactional
@@ -126,11 +131,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public User getUserByUserId(int userId) {
         User user = userDao.getUserByUserId(userId);
-        List<City> cities = Optional
-                .ofNullable(restTemplate.getForObject(
-                        "http://CLIENT-TEST/api/cities/{countryId}",
-                        List.class, 522))
-                .orElse(Collections.emptyList());
+       List<City> cities=testFeignClient.getCitiesByCountryId(522);
         user.setCities(cities);
         return user;
     }
