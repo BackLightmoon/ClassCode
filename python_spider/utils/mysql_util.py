@@ -33,3 +33,20 @@ def close_connect_cursor(conn,cur):
     conn.close();
 
 
+def execute_(sql):
+    #判断 SQL select 开头
+    connect,cursor = get_connect_cursor();
+    result = None;
+    if sql.startswith("select"):
+        result = execute_query(cursor,sql);
+        close_connect_cursor(connect,cursor);
+    else:
+        result = exute_insert_update_delete(cursor,sql);
+        commit_(connect);
+        close_connect_cursor(connect,cursor);
+    return result;
+
+
+if __name__ == "__main__":
+    temp = "select *";
+    print(temp.startswith("select"));
