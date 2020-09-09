@@ -62,8 +62,8 @@ def get_gzbd_data():
 
 
 if __name__ == "__main__":
-    #storage_mysql();
-    storage_excel();
+    storage_mysql();
+    #storage_excel();
 
 
 

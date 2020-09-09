@@ -8,6 +8,7 @@ gzbd 数据爬取
 
 import requests;
 import re;
+import spider_util;
 from bs4 import BeautifulSoup;
 
 
@@ -15,6 +16,16 @@ __wjw_regin = "四川";
 __wjw_domain = "http://wsjkw.sc.gov.cn";
 __wjw_base_url = "/scwsjkw/gzbd01/ztwzlmgl.shtml"
 __wjw_page_count = 1;
+request_headers = {
+    'Host': 'wsjkw.sc.gov.cn',
+    'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:77.0) Gecko/20100101 Firefox/77.0',
+    'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+    'Accept-Language': 'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2',
+    'Accept-Encoding': 'gzip, deflate',
+    'Connection': 'keep-alive',
+    'Cookie': spider_util.get_cookies("%s%s"%(__wjw_domain, __wjw_base_url)),
+    'Upgrade-Insecure-Requests': '1'
+};
 
 
 def gzbd_all_data():
@@ -45,7 +56,7 @@ def gzbd_all_data():
 def news_page_data(url):
     news_list=[];
 
-    r = requests.get(url);
+    r = requests.get(url, headers=request_headers);
     r.encoding = r.apparent_encoding;
 
     bs = BeautifulSoup(r.text, "html.parser");
@@ -69,7 +80,7 @@ def new_page_data(url):
     new_dict = {};
 
     #requests获取页面内容
-    r = requests.get(url);
+    r = requests.get(url, headers=request_headers);
     r.encoding=r.apparent_encoding;
 
     # bs4 j解析页面标签
